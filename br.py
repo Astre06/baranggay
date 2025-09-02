@@ -5,8 +5,9 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 # -------- Barangay Picker --------
-def get_random_city_barangay(path="/home/username/data/philippine_provinces_cities_municipalities_and_barangays_2019v2.json"):
+def get_random_city_barangay(path="/path/to/your/philippine_provinces_cities_municipalities_and_barangays_2019v2.json"):
     if not os.path.exists(path):
+        print(f"❌ The file at {path} does not exist.")
         return None, None, None, None
     try:
         with open(path, encoding="utf-8") as f:
@@ -21,6 +22,7 @@ def get_random_city_barangay(path="/home/username/data/philippine_provinces_citi
                         city_list.append((region_name, province_name, municipality_name, barangays))
 
         if not city_list:
+            print("❌ No valid data found.")
             return None, None, None, None
 
         region, province, city_name, barangays = random.choice(city_list)
@@ -28,10 +30,8 @@ def get_random_city_barangay(path="/home/username/data/philippine_provinces_citi
         return region, province, city_name, barangay_name
 
     except Exception as e:
-        print("❌ Error reading JSON:", e)
+        print(f"❌ Error reading JSON: {e}")
         return None, None, None, None
-
-
 
 # -------- Telegram Bot Handlers --------
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -61,4 +61,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
