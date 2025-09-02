@@ -5,7 +5,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 # -------- Barangay Picker --------
-def get_random_city_barangay(path=r"C:\Users\MidnightCatz\Desktop\br\philippine_provinces_cities_municipalities_and_barangays_2019v2.json"):
+def get_random_city_barangay(path="/home/username/data/philippine_provinces_cities_municipalities_and_barangays_2019v2.json"):
     if not os.path.exists(path):
         return None, None
     try:
@@ -30,6 +30,7 @@ def get_random_city_barangay(path=r"C:\Users\MidnightCatz\Desktop\br\philippine_
     except Exception as e:
         print("❌ Error reading JSON:", e)
         return None, None, None, None
+
 
 
 # -------- Telegram Bot Handlers --------
