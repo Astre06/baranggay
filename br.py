@@ -5,7 +5,11 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 # -------- Barangay Picker --------
-def get_random_city_barangay(path="/path/to/your/philippine_provinces_cities_municipalities_and_barangays_2019v2.json"):
+def get_random_city_barangay(path=None):
+    if path is None:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.join(base_dir, "philippine_provinces_cities_municipalities_and_barangays_2019v2.json")
+
     if not os.path.exists(path):
         print(f"❌ The file at {path} does not exist.")
         return None, None, None, None
@@ -61,5 +65,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
