@@ -7,7 +7,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 # -------- Barangay Picker --------
 def get_random_city_barangay(path="/home/username/data/philippine_provinces_cities_municipalities_and_barangays_2019v2.json"):
     if not os.path.exists(path):
-        return None, None
+        return None, None, None, None
     try:
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
@@ -21,7 +21,7 @@ def get_random_city_barangay(path="/home/username/data/philippine_provinces_citi
                         city_list.append((region_name, province_name, municipality_name, barangays))
 
         if not city_list:
-            return None, None
+            return None, None, None, None
 
         region, province, city_name, barangays = random.choice(city_list)
         barangay_name = random.choice(barangays)
@@ -61,3 +61,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
